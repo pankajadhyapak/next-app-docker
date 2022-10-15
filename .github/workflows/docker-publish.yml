@@ -6,15 +6,8 @@ name: Docker
 # documentation.
 
 on:
-  schedule:
-    - cron: '38 6 * * *'
   push:
     branches: [ "main" ]
-    # Publish semver tags as releases.
-    tags: [ 'v*.*.*' ]
-  pull_request:
-    branches: [ "main" ]
-
 env:
   # Use docker.io for Docker Hub if empty
   REGISTRY: ghcr.io
@@ -80,6 +73,7 @@ jobs:
           labels: ${{ steps.meta.outputs.labels }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
+          target: "production"
 
 
       # Sign the resulting Docker image digest except on PRs.
